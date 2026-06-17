@@ -107,6 +107,18 @@ const PROJECTS = [
     status: "live",
   },
   {
+    emoji: "⚡",
+    title: "Real-time Live Dashboard",
+    metric: { num: "1 sec", label: "updates pushed to every connected browser" },
+    blurb:
+      "FastAPI WebSockets stream live metrics to all connected clients in real time, with an auto-drawing sparkline and a REST snapshot endpoint. Open two tabs — they tick together.",
+    tags: ["FastAPI", "WebSockets", "Real-time", "Vanilla JS", "Docker"],
+    github: "https://github.com/yusizer/realtime-dashboard",
+    demo: null,
+    caseStudy: "projects/realtime-dashboard.html",
+    status: "live",
+  },
+  {
     emoji: "🌐",
     title: "Personal Portfolio Site",
     metric: { num: "24/7", label: "online, loads in under 3s" },

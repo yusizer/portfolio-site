@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: real-time WebSocket dashboard streaming live metrics to browsers.">
+  <title>Case study — Real-time Live Dashboard · Yusif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__brand" href="../index.html">Yusif<span>.</span></a>
+      <nav class="nav__links">
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Send your idea</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case">
+    <div class="container">
+      <a class="case__back" href="../index.html#work">← Back to all work</a>
+      <div class="case__head__tag">Case study · Real-time</div>
+      <h1>Real-time Live Dashboard</h1>
+      <p class="case__sub">A FastAPI dashboard that streams live metrics to every connected browser over WebSockets — numbers update every second and a sparkline draws itself as data arrives. A REST snapshot endpoint serves non-real-time consumers.</p>
+      <div class="case__meta">
+        <span><b>Stack:</b> FastAPI · WebSockets · uvicorn · vanilla JS + canvas</span>
+        <span><b>Delivery:</b> 1 week</span>
+        <span><b>Tests:</b> 4 passing</span>
+      </div>
+
+      <div class="case__demo">
+        <div class="case__demo__left">
+          <h3>Explore the code</h3>
+          <p>Full source on GitHub — WebSocket stream, background broadcaster, REST snapshot, tests.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn--primary" href="https://github.com/yusizer/realtime-dashboard" target="_blank" rel="noopener">View source ↗</a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <h2><span class="num">01</span>Context</h2>
+        <p>Ops and product teams want to <i>see</i> what's happening right now — requests per second, active users, error rate — not a stale report from yesterday. The job here was a dashboard that reflects reality in real time, shared across whoever is watching.</p>
+
+        <h2><span class="num">02</span>Problem</h2>
+        <p>Polling a REST endpoint every second is wasteful and laggy — many requests, delayed updates, no shared sense of "now". A push-based approach (WebSockets) keeps every viewer in sync with a single stream and minimal overhead, but needs correct connection handling and a clean background task lifecycle.</p>
+
+        <h2><span class="num">03</span>Solution</h2>
+        <ul>
+          <li><b>WebSocket stream:</b> <code class="mono">/ws</code> accepts a connection, sends an immediate snapshot, then pushes updated metrics every second — so the client is never blank.</li>
+          <li><b>Background broadcaster:</b> a single asyncio task advances the metrics and is started/stopped via FastAPI's <code class="mono">lifespan</code> (no leaked tasks on shutdown).</li>
+          <li><b>REST snapshot:</b> <code class="mono">GET /api/metrics</code> returns the latest values for scripts, alerts, or embedding where WebSockets don't fit.</li>
+          <li><b>Live UI:</b> metric cards + a canvas sparkline that auto-draws as values arrive; auto-reconnects if the socket drops.</li>
+          <li><b>Tests:</b> REST snapshot, dashboard page, and a WebSocket stream test (Starlette TestClient).</li>
+        </ul>
+
+        <h2><span class="num">04</span>Outcome</h2>
+        <div class="case__pull">A real-time dashboard where every connected viewer sees the same live numbers ticking together — push-based, low-overhead, with a REST fallback for non-real-time consumers.</div>
+
+        <h2><span class="num">05</span>Tradeoffs &amp; what I'd improve</h2>
+        <ul>
+          <li><b>Simulated metrics</b> — swap <code class="mono">_tick()</code> for real reads (DB counters, Redis, another API); the WebSocket plumbing is unchanged.</li>
+          <li><b>Single-process broadcast</b> — fine for one server; for multiple workers behind a load balancer, move pub/sub to Redis so all workers share one stream.</li>
+          <li><b>Add alerting thresholds</b> — flash a card red when error rate exceeds a limit.</li>
+        </ul>
+
+        <div class="case__cta">
+          <h2 style="margin:0 0 8px;border:0;">Need a live view of your system?</h2>
+          <p style="margin:0 0 18px;color:var(--text-soft);">I can build a real-time dashboard over your metrics — WebSockets for live viewing, REST for scripts and alerts.</p>
+          <a class="btn btn--primary" href="../index.html#contact">Send me your idea →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> Yusif · Built with Python &amp; static HTML</span>
+      <span><a href="../index.html">Back to portfolio ↑</a></span>
+    </div>
+  </footer>
+  <script src="../case-nav.js"></script>
+</body>
+</html>
