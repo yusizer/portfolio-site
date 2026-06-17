@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: Telegram booking bot with slot conflict detection and reminders.">
+  <title>Case study — Telegram Booking Bot · Yusif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__brand" href="../index.html">Yusif<span>.</span></a>
+      <nav class="nav__links">
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Send your idea</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case">
+    <div class="container">
+      <a class="case__back" href="../index.html#work">← Back to all work</a>
+      <div class="case__head__tag">Case study · Telegram bot</div>
+      <h1>Telegram Booking Bot</h1>
+      <p class="case__sub">A Telegram bot that lets customers book an appointment in a few taps — service → day → available slot → name — with slot conflict detection, self-service cancel, an admin view, and automatic reminders before each appointment.</p>
+      <div class="case__meta">
+        <span><b>Stack:</b> Python · aiogram 3 (FSM) · SQLAlchemy 2 (async) · SQLite</span>
+        <span><b>Delivery:</b> 1–2 weeks</span>
+        <span><b>Tests:</b> 6 passing</span>
+      </div>
+
+      <div class="case__demo">
+        <div class="case__demo__left">
+          <h3>Explore the code</h3>
+          <p>Full source on GitHub — booking logic, FSM handlers, reminder loop, tests.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn--primary" href="https://github.com/yusizer/telegram-booking-bot" target="_blank" rel="noopener">View source ↗</a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <h2><span class="num">01</span>Context</h2>
+        <p>Service businesses — salons, clinics, tutors, consultants — live and die by their calendar. Every missed call or delayed reply is a lost booking. The job here was a booking bot the customer can use at 2am, that never double-books and never forgets to remind them.</p>
+
+        <h2><span class="num">02</span>Problem</h2>
+        <p>Manual booking over chat means the owner has to check the calendar, find a free slot, write it down, and remember to remind the customer — every step a chance to drop the ball. Two customers picking "Thursday at 3" simultaneously = a double booking. The bot had to make booking effortless <i>and</i> make the calendar self-protecting.</p>
+
+        <h2><span class="num">03</span>Solution</h2>
+        <ul>
+          <li><b>FSM flow:</b> <code class="mono">/book</code> → choose a service → pick a day (next 7) → pick an available slot → enter a name → confirmation with a booking ID.</li>
+          <li><b>Slot conflict detection:</b> taken slots are removed from the list; a concurrent double-booking is rejected at the DB level.</li>
+          <li><b>Self-service:</b> <code class="mono">/mybookings</code> lists active bookings; tap one to cancel. Only the owner can cancel their own.</li>
+          <li><b>Admin:</b> <code class="mono">/admin</code> (authorized user IDs) shows today's bookings at a glance.</li>
+          <li><b>Reminders:</b> a background loop finds bookings within the reminder window and pings the customer automatically.</li>
+          <li><b>Testable core:</b> slot generation, conflict detection, CRUD, and reminders are pure async functions unit-tested with an in-memory DB — the bot is a thin layer over them.</li>
+        </ul>
+
+        <h2><span class="num">04</span>Outcome</h2>
+        <div class="case__pull">Bookings any time of day, no double-booking, no forgotten reminders — the calendar runs itself while the owner focuses on the work.</div>
+        <div class="case__bench">
+          <h4>Why this matters (third-party benchmarks, cited)</h4>
+          <ul>
+            <li>Booking bots cut no-shows by <b>27%</b> and scheduling time by <b>40%</b> in a real salon case. <a href="https://botlabs.agency/blog/how-a-telegram-bot-can-transform-your-beauty-salon-booking-loyalty-and-automation-in-2026/" target="_blank" rel="noopener">botlabs.agency</a></li>
+            <li>A clinic chatbot confirmed <b>60%</b> of appointments without a human calling. <a href="https://chat2desk.com/en/blog/cases/a-whatsapp-chatbot-confirms-60-of-appointments-without-calling-a-case-study-of-chat2desk-and-chatme-ai" target="_blank" rel="noopener">chat2desk.com</a></li>
+          </ul>
+        </div>
+
+        <h2><span class="num">05</span>Tradeoffs &amp; what I'd improve</h2>
+        <ul>
+          <li><b>Slot list rebuild</b> — slots are generated from configurable hours/step; for per-service durations I'd compute slot capacity from each service's length.</li>
+          <li><b>Add reschedule</b> and a web admin calendar (the lead-bot project already shows a FastAPI admin pattern).</li>
+          <li><b>Deposit/confirm</b> — integrate Telegram Payments to take a deposit at booking time to cut no-shows further.</li>
+        </ul>
+
+        <div class="case__cta">
+          <h2 style="margin:0 0 8px;border:0;">Tired of booking by hand?</h2>
+          <p style="margin:0 0 18px;color:var(--text-soft);">I can ship a booking bot for your salon, clinic, or consultancy — calendar, reminders, and self-service cancel, in 1–2 weeks.</p>
+          <a class="btn btn--primary" href="../index.html#contact">Send me your idea →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> Yusif · Built with Python &amp; static HTML</span>
+      <span><a href="../index.html">Back to portfolio ↑</a></span>
+    </div>
+  </footer>
+  <script src="../case-nav.js"></script>
+</body>
+</html>

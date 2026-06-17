@@ -119,6 +119,18 @@ const PROJECTS = [
     status: "live",
   },
   {
+    emoji: "📅",
+    title: "Telegram Booking Bot",
+    metric: { num: "3 taps", label: "to book — service, day, slot" },
+    blurb:
+      "aiogram 3 bot to book appointments in a few taps: service → day → available slot → name. Slot conflict detection, /mybookings + tap-to-cancel, admin list, and a reminder loop.",
+    tags: ["Python", "aiogram 3", "FSM", "SQLite", "Docker"],
+    github: "https://github.com/yusizer/telegram-booking-bot",
+    demo: null,
+    caseStudy: "projects/telegram-booking-bot.html",
+    status: "live",
+  },
+  {
     emoji: "🌐",
     title: "Personal Portfolio Site",
     metric: { num: "24/7", label: "online, loads in under 3s" },
