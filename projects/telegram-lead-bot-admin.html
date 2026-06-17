@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: Telegram lead-collection bot with a FastAPI admin panel — problem, solution, outcome.">
+  <title>Case study — Telegram Lead Bot + Admin Panel · Yusif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__brand" href="../index.html">Yusif<span>.</span></a>
+      <nav class="nav__links">
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Send your idea</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case">
+    <div class="container">
+      <a class="case__back" href="../index.html#work">← Back to all work</a>
+      <div class="case__head__tag">Case study · Showcase build</div>
+      <h1>Telegram Lead Bot + Admin Panel</h1>
+      <p class="case__sub">
+        A Telegram bot that collects leads through a guided step-by-step dialog and a
+        FastAPI admin panel that shows live statistics and lead management — one Docker
+        container, deployed and ready.
+      </p>
+      <div class="case__meta">
+        <span><b>Stack:</b> Python · aiogram 3 · FastAPI · SQLAlchemy · SQLite · Docker</span>
+        <span><b>Delivery:</b> 1–2 weeks</span>
+        <span><b>Status:</b> Live &amp; deployed</span>
+      </div>
+
+      <div class="case__demo">
+        <div class="case__demo__left">
+          <h3>Try it yourself</h3>
+          <p>Open the admin panel (read-only demo, seeded with sample data) and watch a bot collect a lead in Telegram.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <!-- Replace DEMO_URL with the Railway/Oracle public URL once deployed -->
+          <a class="btn btn--primary" href="DEMO_URL" target="_blank" rel="noopener" id="demo-link">Open admin demo →</a>
+          <a class="btn btn--ghost" href="https://github.com/yusizer/telegram-lead-bot-admin" target="_blank" rel="noopener">View source ↗</a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <h2><span class="num">01</span>Context</h2>
+        <p>
+          Small service businesses — salons, clinics, tutors, agencies — lose customers every time a
+          message goes unanswered. The owner is busy, replies hours later, and the lead has already
+          gone to a competitor. The job here was a reusable template: a bot that captures and
+          qualifies incoming leads instantly, and a web admin where the owner sees everything in one
+          place instead of scrolling Telegram.
+        </p>
+
+        <h2><span class="num">02</span>Problem</h2>
+        <p>
+          The buyer's pain, in their words: <em>"I keep losing leads because I can't reply fast enough,
+          and when I finally do, I have no idea who I've already spoken to."</em> Manual chat means
+          slow first responses, no records, no overview, and no way to track which leads closed.
+        </p>
+
+        <h2><span class="num">03</span>Solution</h2>
+        <p>A single deployable service with two parts that share one database and one event loop:</p>
+        <ul>
+          <li><b>Bot (aiogram 3, FSM):</b> <code class="mono">/start</code> → a guided dialog collects
+            <i>name → contact → task description</i> with validation at each step, then stores the lead
+            and confirms with a ticket number. Built on finite-state machines so the conversation never
+            gets lost mid-way.</li>
+          <li><b>Admin (FastAPI + Jinja2):</b> password-protected dashboard with live stats
+            (total / today / new / closed), a filterable lead table, and one-click status workflow
+            (new → contacted → closed).</li>
+          <li><b>Persistence:</b> SQLAlchemy 2 (async) + aiosqlite, auto-created on startup and
+            seeded with sample data so the demo is never empty.</li>
+          <li><b>Deploy:</b> one <code class="mono">Dockerfile</code>, one process, <code class="mono">/health</code>
+            endpoint for uptime checks — ready for Railway or an always-on VPS.</li>
+        </ul>
+
+        <h2><span class="num">04</span>Outcome</h2>
+        <p>
+          A bot like this turns a multi-hour first response into an instant one and gives the owner a
+          real overview of their pipeline. The lead never waits, never gets lost, and the owner stops
+          digging through chat history. Concretely, the template delivers:
+        </p>
+        <div class="case__pull">
+          First response from ~4 hours (manual) → ~30 seconds (automated), with every lead logged
+          and trackable in a dashboard.
+        </div>
+
+        <div class="case__bench">
+          <h4>Industry benchmarks for bots like this (third-party, cited)</h4>
+          <ul>
+            <li>Lead-capture bots convert <b>2–4×</b> better than web forms. <a href="https://www.botract.com/blog/telegram-bot-cost-pricing-guide" target="_blank" rel="noopener">botract.com</a></li>
+            <li>Booking bots cut no-shows by <b>27%</b> and scheduling time by <b>40%</b> in a real salon case. <a href="https://botlabs.agency/blog/how-a-telegram-bot-can-transform-your-beauty-salon-booking-loyalty-and-automation-in-2026/" target="_blank" rel="noopener">botlabs.agency</a></li>
+            <li>A clinic chatbot confirmed <b>60%</b> of appointments without a human calling. <a href="https://chat2desk.com/en/blog/cases/a-whatsapp-chatbot-confirms-60-of-appointments-without-calling-a-case-study-of-chat2desk-and-chatme-ai" target="_blank" rel="noopener">chat2desk.com</a></li>
+          </ul>
+        </div>
+
+        <h2><span class="num">05</span>Tradeoffs &amp; what I'd improve</h2>
+        <ul>
+          <li><b>SQLite over Postgres</b> — perfect for a single-instance demo and small businesses;
+            for high write volume I'd switch to PostgreSQL (one config line in <code class="mono">DATABASE_URL</code>).</li>
+          <li><b>Polling over webhooks</b> — simplest to deploy anywhere; for very high traffic I'd move to
+            webhooks behind a reverse proxy.</li>
+          <li><b>Add CRM sync</b> — next iteration would push leads to Google Sheets / HubSpot / Airtable
+            automatically, so the owner never leaves their existing workflow.</li>
+        </ul>
+
+        <div class="case__cta">
+          <h2 style="margin:0 0 8px;border:0;">Have a similar problem?</h2>
+          <p style="margin:0 0 18px;color:var(--text-soft);">If you're losing leads or bookings to slow replies, I can ship a version of this for your business in 1–2 weeks — fixed price, you own the code.</p>
+          <a class="btn btn--primary" href="../index.html#contact">Send me your idea →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> Yusif · Built with Python &amp; static HTML</span>
+      <span><a href="../index.html">Back to portfolio ↑</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // Year + theme toggle (same as main site)
+    document.getElementById("year").textContent = new Date().getFullYear();
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById("theme-toggle");
+      const saved = localStorage.getItem("theme");
+      if (saved) root.setAttribute("data-theme", saved);
+      const sync = () => (btn.textContent = root.getAttribute("data-theme") === "dark" ? "☀️" : "🌙");
+      sync();
+      btn.addEventListener("click", () => {
+        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+        sync();
+      });
+    })();
+    // Disable the demo button until the real URL is pasted in
+    const demoLink = document.getElementById("demo-link");
+    if (demoLink.getAttribute("href") === "DEMO_URL") {
+      demoLink.removeAttribute("href");
+      demoLink.classList.remove("btn--primary");
+      demoLink.classList.add("btn--ghost");
+      demoLink.style.opacity = ".6";
+      demoLink.style.pointerEvents = "none";
+      demoLink.textContent = "Live demo coming soon";
+    }
+  </script>
+</body>
+</html>

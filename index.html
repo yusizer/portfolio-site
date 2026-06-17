@@ -1,75 +1,269 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio — Telegram bots, FastAPI backends, web scrapers, automation. Python developer for hire.">
-  <title>Yusif — Python Developer</title>
+  <meta name="description" content="Telegram bots that capture leads, book appointments and run your busywork 24/7. Custom bots, FastAPI admin panels, web scraping & automation for businesses. Fixed price, you own the code.">
+  <title>Yusif — Telegram Bots & Python Automation for Businesses</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="nav" id="top">
-    <a class="nav__brand" href="#top">Yusif<span>.</span></a>
-    <nav class="nav__links">
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-      <a class="btn btn--ghost" href="https://github.com/yusizer" target="_blank" rel="noopener">GitHub</a>
-    </nav>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__brand" href="#top">Yusif<span>.</span></a>
+      <nav class="nav__links">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn--primary btn--sm" href="#contact">Send your idea</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero">
-    <div class="hero__inner">
-      <span class="hero__badge">● Available for freelance</span>
-      <h1>Telegram bots &amp; backends<br>that actually run a business.</h1>
-      <p class="hero__lead">
-        I build Telegram bots with admin panels, FastAPI backends, web scrapers
-        and automation workflows — deployed, documented, and ready for clients.
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="hero__bg"></div>
+    <div class="container hero__inner">
+      <span class="hero__badge reveal"><span class="dot"></span> Available — accepting 2 projects for July 2026</span>
+      <h1 class="reveal d1">Telegram bots that capture leads, book appointments &amp; run your <span class="accent">busywork — 24/7.</span></h1>
+      <p class="hero__lead reveal d2">
+        Custom Telegram bots, FastAPI admin panels and automation for service businesses,
+        e-commerce and agencies. From idea to deployed in 1–3 weeks — fixed price,
+        and <b>you own the code</b>.
       </p>
-      <div class="hero__cta">
-        <a class="btn btn--primary" href="#projects">View projects →</a>
-        <a class="btn btn--ghost" href="#contact">Hire me</a>
+      <div class="hero__cta reveal d3">
+        <a class="btn btn--primary" href="#contact">Send me your bot idea →</a>
+        <a class="btn btn--ghost" href="#work">See case studies</a>
       </div>
-      <div class="hero__stats">
-        <div><strong id="stat-projects">5</strong><span>projects planned</span></div>
-        <div><strong id="stat-live">1</strong><span>live demo</span></div>
-        <div><strong>Python</strong><span>stack</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="projects">
-    <div class="section__head">
-      <h2>Projects</h2>
-      <p>Each project ships with source code on GitHub, a README, and a live demo.</p>
-    </div>
-    <div class="grid" id="project-grid"><!-- rendered by script.js --></div>
-  </section>
-
-  <section class="section section--alt" id="skills">
-    <div class="section__head">
-      <h2>Skills &amp; stack</h2>
-      <p>What I use to deliver end-to-end.</p>
-    </div>
-    <div class="chips" id="skill-chips"></div>
-  </section>
-
-  <section class="section" id="contact">
-    <div class="contact">
-      <h2>Let's build something.</h2>
-      <p>Need a Telegram bot, an API, or a scraper? Tell me what you want to automate — I'll scope it and ship it.</p>
-      <div class="contact__links">
-        <a class="btn btn--primary" href="mailto:yusifabdullayev48@gmail.com">yusifabdullayev48@gmail.com</a>
-        <a class="btn btn--ghost" href="https://github.com/yusizer" target="_blank" rel="noopener">GitHub →</a>
+      <div class="statsbar reveal d4" id="statsbar">
+        <div class="statsbar__item"><span class="ic">✓</span> Reply <strong>within 24h</strong></div>
+        <div class="statsbar__item"><span class="ic">✓</span> <strong>100%</strong> on-time delivery</div>
+        <div class="statsbar__item"><span class="ic">✓</span> <strong>Full source code</strong> included</div>
+        <div class="statsbar__item"><span class="ic">✓</span> <strong>5★</strong> goal on every order</div>
       </div>
     </div>
   </section>
 
+  <!-- ============ TRUST STRIP ============ -->
+  <section class="trust">
+    <div class="container trust__inner">
+      <span>🤖 <b>Telegram bots</b></span><span class="trust__sep">·</span>
+      <span>📊 <b>Admin dashboards</b></span><span class="trust__sep">·</span>
+      <span>🕸️ <b>Web scraping</b></span><span class="trust__sep">·</span>
+      <span>⚡ <b>n8n automation</b></span><span class="trust__sep">·</span>
+      <span>🔐 <b>FastAPI backends</b></span>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section__head reveal">
+        <div class="section__tag">What I build</div>
+        <h2>Bots &amp; automation that do the work while you sleep</h2>
+        <p>Three things I specialize in. Each ships with a live demo, source code, and a fixed quote.</p>
+      </div>
+      <div class="grid-3" id="services-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ WORK / CASE STUDIES ============ -->
+  <section class="section section--soft" id="work">
+    <div class="container">
+      <div class="section__head reveal">
+        <div class="section__tag">Selected work</div>
+        <h2>Projects, not screenshots</h2>
+        <p>Every project links to a live demo and a case study with the problem, the build, and the business outcome.</p>
+      </div>
+      <div class="projects-grid" id="projects-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section__head reveal">
+        <div class="section__tag">How I work</div>
+        <h2>No ghosting, no scope creep, no surprises</h2>
+        <p>Most clients have been burned by a developer before. Here's exactly what working with me looks like.</p>
+      </div>
+      <div class="process" id="process-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="section section--soft" id="pricing">
+    <div class="container">
+      <div class="section__head reveal">
+        <div class="section__tag">Pricing</div>
+        <h2>Fixed price before any work starts</h2>
+        <p>Market-rate packages anchored to 2026 data. You get a same-day estimate and a fixed quote after a 20-minute call — no hourly surprises.</p>
+      </div>
+      <div class="price-grid" id="price-grid"></div>
+      <p class="price-note reveal">
+        <b>Every package includes:</b> full source-code ownership, deployment to your server, documentation,
+        30 days of free bug fixes, and 2 free revision rounds. Hosting runs ~$5–20/mo on a VPS — I set it up.
+        Want it faster? Ask about expedited delivery (+30–50%).
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section__head reveal">
+        <div class="section__tag">FAQ</div>
+        <h2>Answers to the questions buyers ask first</h2>
+        <p>Don't see yours? <a class="link--accent" href="#contact">Ask me directly</a> — I reply within 24 hours.</p>
+      </div>
+      <div class="faq" id="faq-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ SECURITY ============ -->
+  <section class="section section--soft" id="security">
+    <div class="container">
+      <div class="section__head reveal">
+        <div class="section__tag">Security &amp; trust</div>
+        <h2>Your keys, your data, your code</h2>
+        <p>The #1 fear with Telegram bots is handing sensitive access to a stranger. Here's how I keep it safe.</p>
+      </div>
+      <div class="security reveal">
+        <div class="security__grid">
+          <div class="security__item"><h4><span class="ic">✓</span>Keys in env vars</h4><p>Tokens &amp; API keys never hard-coded — stored in environment variables / a secret manager, never committed to git.</p></div>
+          <div class="security__item"><h4><span class="ic">✓</span>Least-privilege bot</h4><p>The bot gets only the Telegram scopes it needs — nothing more. No admin rights, no access to your chats.</p></div>
+          <div class="security__item"><h4><span class="ic">✓</span>You own everything</h4><p>Full source code + deployment access transferred on delivery. No lock-in, no "hosting hostage."</p></div>
+          <div class="security__item"><h4><span class="ic">✓</span>On-platform payments</h4><p>For Fiverr orders, all payments stay on-platform. I never ask for off-platform transfers.</p></div>
+          <div class="security__item"><h4><span class="ic">✓</span>Data stays with you</h4><p>The bot runs on your server. No conversation history retained longer than needed, nothing sent to model training.</p></div>
+          <div class="security__item"><h4><span class="ic">✓</span>GDPR-ready</h4><p>For EU clients: data access/deletion on request, privacy policy included if you need one.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="about">
+    <div class="container about">
+      <div class="about__copy reveal">
+        <div class="section__tag">About</div>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.1rem);font-weight:700;margin:10px 0 16px;letter-spacing:-.02em;">A Python automation specialist who ships</h2>
+        <p>
+          I'm a freelance Python developer who builds Telegram bots and automations for small
+          businesses that can't afford to miss a customer. Every bot I ship is fixed-price, delivered
+          in weeks not months, and comes with full source-code ownership, deployment, documentation,
+          and 30 days of free bug fixes.
+        </p>
+        <p>
+          No monthly lock-in, no black box — just a bot that captures leads, books appointments, or
+          answers customers around the clock, plus a developer who replies fast and stays available
+          after launch.
+        </p>
+        <ul class="about__bullets">
+          <li><b>Good at:</b> Telegram bots (aiogram), FastAPI backends, web scraping, automation, admin dashboards.</li>
+          <li><b>Care about:</b> reliability, deadlines, clean handoff with real documentation.</li>
+          <li><b>How I work:</b> fixed scope, weekly demos, milestone sign-off, support after launch.</li>
+        </ul>
+      </div>
+      <div class="reveal d2">
+        <div class="timeline">
+          <div class="timeline__item">
+            <div class="timeline__when">Now</div>
+            <h4>Freelance — Telegram bots &amp; automation</h4>
+            <p>Custom bots, admin panels, scrapers &amp; n8n workflows for businesses worldwide.</p>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__when">2025</div>
+            <h4>GitHub bounty hunting &amp; open-source</h4>
+            <p>Built tooling to discover &amp; act on paid open-source issues — sharpens real-world Python.</p>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__when">Stack</div>
+            <h4>Python · FastAPI · aiogram · PostgreSQL</h4>
+            <p>Docker, Linux/VPS, n8n, BeautifulSoup/Scrapy, JWT auth, SQLAlchemy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section section--soft" id="contact">
+    <div class="container contact">
+      <div class="contact__copy reveal">
+        <div class="section__tag">Contact</div>
+        <h2>Tell me what you want to automate</h2>
+        <p>Send a few lines about your business and what the bot should do. You'll get a same-day estimate and a fixed quote after a quick call — no pressure, no obligation.</p>
+        <ul class="contact__points">
+          <li><span class="ic">↳</span> Reply within 24 hours, every time</li>
+          <li><span class="ic">↳</span> Fixed price before any work starts</li>
+          <li><span class="ic">↳</span> You own the code — no lock-in</li>
+          <li><span class="ic">↳</span> Or email directly: <a class="link--accent" href="mailto:yusifabdullayev48@gmail.com">yusifabdullayev48@gmail.com</a></li>
+        </ul>
+      </div>
+      <form class="form reveal d2" id="contact-form">
+        <input type="hidden" name="_subject" value="New bot inquiry from portfolio">
+        <div class="form__grid">
+          <div class="form__row">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" required placeholder="Jane Doe">
+          </div>
+          <div class="form__row">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" required placeholder="jane@business.com">
+          </div>
+        </div>
+        <div class="form__row">
+          <label for="f-type">Business type</label>
+          <select id="f-type" name="business_type">
+            <option>Service / booking (salon, clinic, tutor…)</option>
+            <option>E-commerce / D2C</option>
+            <option>Agency / lead generation</option>
+            <option>SaaS / startup</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form__row">
+          <label for="f-budget">Rough budget</label>
+          <select id="f-budget" name="budget">
+            <option>Under $400</option>
+            <option>$400 – $750</option>
+            <option>$750 – $1,500</option>
+            <option>$1,500+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form__row">
+          <label for="f-idea">What should the bot do?</label>
+          <textarea id="f-idea" name="idea" required placeholder="e.g. A bot that qualifies leads with 3 questions, saves them to a sheet, and notifies me in Telegram."></textarea>
+        </div>
+        <button class="btn btn--primary" type="submit" id="form-submit">Send →</button>
+        <div class="form__msg" id="form-msg"></div>
+        <p class="form__note">
+          This form uses Formspree. If it isn't set up yet, emails go to
+          <a href="mailto:yusifabdullayev48@gmail.com">yusifabdullayev48@gmail.com</a> — see the README.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <span>© <span id="year"></span> Yusif · Built with Python &amp; static HTML</span>
-    <a href="#top">Back to top ↑</a>
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> Yusif · Built with Python &amp; static HTML</span>
+      <span>
+        <a href="https://github.com/yusizer" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="mailto:yusifabdullayev48@gmail.com">Email</a> ·
+        <a href="#top">Back to top ↑</a>
+      </span>
+    </div>
   </footer>
 
   <script src="script.js"></script>
