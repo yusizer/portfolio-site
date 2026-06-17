@@ -4,7 +4,7 @@ A conversion-focused, trust-building portfolio for a freelance Python / Telegram
 automation developer. Static (HTML + CSS + vanilla JS), deployed on **Vercel** —
 free tier, never sleeps, so clients can visit any time.
 
-> **Live:** _<добавь Vercel-домен после деплоя>_
+> **Live:** https://portfolio-site-jade-beta.vercel.app
 
 Built on research into what actually converts freelance clients in 2025–2026 (outcome-first
 copy, case studies with metrics, fixed-price packages, a "how I work" section, security &

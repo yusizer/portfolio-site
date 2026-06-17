@@ -94,6 +94,18 @@ const PROJECTS = [
     caseStudy: null,
     status: "wip",
   },
+  {
+    emoji: "🌐",
+    title: "Personal Portfolio Site",
+    metric: { num: "24/7", label: "online, loads in under 3s" },
+    blurb:
+      "This site — a fast, static portfolio on Vercel's free tier. Never sleeps, auto-redeploys on every push, lists every project with live demo links.",
+    tags: ["HTML", "CSS", "Vanilla JS", "Vercel"],
+    github: "https://github.com/yusizer/portfolio-site",
+    demo: "https://portfolio-site-jade-beta.vercel.app",
+    caseStudy: null,
+    status: "live",
+  },
 ];
 
 // ---- Process ----
