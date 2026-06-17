@@ -89,7 +89,7 @@ const PROJECTS = [
     blurb:
       "Form on a site → Google Sheets → email → Telegram post. Self-hosted n8n, with a recorded walkthrough as the demo.",
     tags: ["n8n", "Automation", "Google Sheets", "Railway"],
-    github: null,
+    github: "https://github.com/yusizer/n8n-lead-automation",
     demo: null,
     caseStudy: null,
     status: "wip",
