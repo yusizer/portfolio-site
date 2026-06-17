@@ -95,6 +95,18 @@ const PROJECTS = [
     status: "wip",
   },
   {
+    emoji: "💬",
+    title: "AI Support Chatbot (RAG)",
+    metric: { num: "0 API key", label: "needed for the demo — GPT when a key is set" },
+    blurb:
+      "Retrieval (TF-IDF) over a FAQ knowledge base + optional GPT answers grounded in context. Runs in demo mode with no API key; graceful fallback + human handoff. Web chat UI + FAQ admin.",
+    tags: ["FastAPI", "TF-IDF", "OpenAI", "RAG", "SQLite"],
+    github: "https://github.com/yusizer/ai-support-chatbot",
+    demo: null,
+    caseStudy: null,
+    status: "wip",
+  },
+  {
     emoji: "🌐",
     title: "Personal Portfolio Site",
     metric: { num: "24/7", label: "online, loads in under 3s" },
