@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: AI support chatbot with TF-IDF retrieval and optional GPT grounding (RAG).">
+  <title>Case study — AI Support Chatbot (RAG) · Yusif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__brand" href="../index.html">Yusif<span>.</span></a>
+      <nav class="nav__links">
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Send your idea</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case">
+    <div class="container">
+      <a class="case__back" href="../index.html#work">← Back to all work</a>
+      <div class="case__head__tag">Case study · AI / RAG</div>
+      <h1>AI Support Chatbot (RAG)</h1>
+      <p class="case__sub">A customer-support chatbot that answers from a knowledge base using TF-IDF retrieval — with optional GPT answers grounded in that context. Runs in demo mode with no API key, falls back gracefully, and hands off to a human when unsure.</p>
+      <div class="case__meta">
+        <span><b>Stack:</b> FastAPI · pure-Python TF-IDF · OpenAI (optional) · SQLAlchemy 2</span>
+        <span><b>Delivery:</b> 2–3 weeks</span>
+        <span><b>Tests:</b> 10 passing</span>
+      </div>
+
+      <div class="case__demo">
+        <div class="case__demo__left">
+          <h3>Explore the code</h3>
+          <p>Full source on GitHub — retrieval, RAG pipeline, FAQ admin, chat logs, 10 pytest cases.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn--primary" href="https://github.com/yusizer/ai-support-chatbot" target="_blank" rel="noopener">View source ↗</a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <h2><span class="num">01</span>Context</h2>
+        <p>Support teams answer the same handful of questions all day. An AI assistant that answers from the company's own knowledge base — without hallucinating — cuts repetitive load and replies instantly, 24/7.</p>
+
+        <h2><span class="num">02</span>Problem</h2>
+        <p>Generic chatbots hallucinate answers that sound confident but are wrong — dangerous for support. A pure LLM with no grounding invents policies, prices, and hours. The job was to ground every answer in the business's actual FAQ, and to know when to stop and hand off to a human.</p>
+
+        <h2><span class="num">03</span>Solution</h2>
+        <ul>
+          <li><b>Retrieval (TF-IDF):</b> pure-Python index over the FAQ knowledge base — scores each question by IDF-weighted overlap, returns the top matches. No heavy ML deps.</li>
+          <li><b>Two modes:</b> <i>local demo</i> (no API key) returns the best-matching FAQ answer; <i>LLM mode</i> (with <code class="mono">OPENAI_API_KEY</code>) has GPT answer using the top-3 FAQs as context (RAG).</li>
+          <li><b>Grounding + guardrails:</b> the system prompt forces answers to use only the provided info; if it's not covered, say so.</li>
+          <li><b>Graceful fallback:</b> if the LLM call errors, the bot falls back to the retrieved FAQ answer — never a blank reply.</li>
+          <li><b>Human handoff:</b> below a confidence threshold, the bot says it'll connect a human instead of guessing.</li>
+          <li><b>FAQ admin API + chat logs:</b> add/manage knowledge-base entries; every conversation is logged for review.</li>
+          <li><b>Tests:</b> 10 cases — retrieval, local/LLM/handoff modes, fallback on error, FAQ CRUD, logs.</li>
+        </ul>
+
+        <h2><span class="num">04</span>Outcome</h2>
+        <div class="case__pull">Instant, grounded answers from the business's own knowledge base — with a demo that runs without any API key and a safe handoff when the bot isn't sure.</div>
+        <div class="case__bench">
+          <h4>Industry context (third-party, cited)</h4>
+          <ul>
+            <li>Booking/support bots cut repetitive support load by up to <b>60%</b>. <a href="https://chat2desk.com/en/blog/cases/a-whatsapp-chatbot-confirms-60-of-appointments-without-calling-a-case-study-of-chat2desk-and-chatme-ai" target="_blank" rel="noopener">chat2desk.com</a></li>
+            <li>RAG grounds LLM answers in source documents, the standard pattern to prevent hallucination in support bots.</li>
+          </ul>
+        </div>
+
+        <h2><span class="num">05</span>Tradeoffs &amp; what I'd improve</h2>
+        <ul>
+          <li><b>TF-IDF vs embeddings:</b> great for a small FAQ and fully offline; for a large/semantic KB I'd swap in vector embeddings (e.g. OpenAI embeddings + cosine).</li>
+          <li><b>No conversation memory yet</b> — each turn is independent; next step is short-term memory for follow-ups.</li>
+          <li><b>Telegram channel:</b> same backend behind an aiogram bot so answers reach customers where they already are.</li>
+        </ul>
+
+        <div class="case__cta">
+          <h2 style="margin:0 0 8px;border:0;">Want a support bot that doesn't hallucinate?</h2>
+          <p style="margin:0 0 18px;color:var(--text-soft);">I can build a grounded AI assistant over your knowledge base — web chat or Telegram, with human handoff and a FAQ admin you control.</p>
+          <a class="btn btn--primary" href="../index.html#contact">Send me your idea →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> Yusif · Built with Python &amp; static HTML</span>
+      <span><a href="../index.html">Back to portfolio ↑</a></span>
+    </div>
+  </footer>
+  <script src="../case-nav.js"></script>
+</body>
+</html>

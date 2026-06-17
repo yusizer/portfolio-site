@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: web scraper that extracts prices from any page and shows them in a dashboard.">
+  <title>Case study — Web Scraper + Dashboard · Yusif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__brand" href="../index.html">Yusif<span>.</span></a>
+      <nav class="nav__links">
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Send your idea</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case">
+    <div class="container">
+      <a class="case__back" href="../index.html#work">← Back to all work</a>
+      <div class="case__head__tag">Case study · Showcase build</div>
+      <h1>Web Scraper + Dashboard</h1>
+      <p class="case__sub">Enter a URL — the scraper pulls out price-shaped snippets (or exactly the elements you select) and shows them in a dashboard with persistent history. A JSON API is included for piping data elsewhere.</p>
+      <div class="case__meta">
+        <span><b>Stack:</b> FastAPI · BeautifulSoup · httpx (async) · SQLAlchemy 2</span>
+        <span><b>Delivery:</b> 3–7 days</span>
+        <span><b>Tests:</b> 12 passing</span>
+      </div>
+
+      <div class="case__demo">
+        <div class="case__demo__left">
+          <h3>Explore the code</h3>
+          <p>Full source on GitHub, with 12 pytest cases covering extraction, parsing, and API routes.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn--primary" href="https://github.com/yusizer/web-scraper-dashboard" target="_blank" rel="noopener">View source ↗</a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <h2><span class="num">01</span>Context</h2>
+        <p>Businesses that sell or compete on price want fresh competitor pricing in one place instead of opening ten tabs a day. The job here was a reusable scraper that works on <i>any</i> page out of the box, plus a precise mode for known site structures.</p>
+
+        <h2><span class="num">02</span>Problem</h2>
+        <p>Manual copy-paste is slow, error-prone, and doesn't scale. Generic scrapers break on every different layout. The buyer wants either "just give me the prices on this page" (no setup) or "extract exactly these elements" (precise) — and a record of what was scraped.</p>
+
+        <h2><span class="num">03</span>Solution</h2>
+        <ul>
+          <li><b>Generic mode:</b> scans any page for price-shaped snippets (<code class="mono">$12.99</code>, <code class="mono">€19.95</code>, <code class="mono">250 000 сум</code>, <code class="mono">1 299 руб</code>, <code class="mono">USD 50</code>…) with surrounding context — no selector needed.</li>
+          <li><b>Precise mode:</b> pass a CSS selector (e.g. <code class="mono">.product-card</code>) to extract exactly those elements — reliable for a known structure.</li>
+          <li><b>Dashboard:</b> web UI with a form, results table, and persistent history of every scrape (SQLite).</li>
+          <li><b>JSON API:</b> <code class="mono">GET /api/scrape?url=…&amp;selector=…</code> for piping into sheets, dashboards, or alerts.</li>
+          <li><b>Robust:</b> browser-like User-Agent, timeouts, graceful error handling (bad URL → clean error, not a crash).</li>
+          <li><b>Tests:</b> 12 cases — price extraction, selector/generic parsing, API routes, form redirect, history.</li>
+        </ul>
+
+        <h2><span class="num">04</span>Outcome</h2>
+        <div class="case__pull">Fresh competitor pricing on demand — type a URL, get a table — plus a JSON API to feed it into whatever the business already uses.</div>
+        <div class="case__bench">
+          <h4>Why this matters (third-party benchmarks, cited)</h4>
+          <ul>
+            <li>Businesses using automated price monitoring react to competitor changes in hours, not days/weeks.</li>
+            <li>Lead-capture and data-pipeline automation is among the most-requested freelance tasks in 2026 (see <a href="https://www.botract.com/blog/telegram-bot-cost-pricing-guide" target="_blank" rel="noopener">botract</a>, <a href="https://aziqdev.com/blog/telegram-bot-development-cost" target="_blank" rel="noopener">aziqdev</a>).</li>
+          </ul>
+        </div>
+
+        <h2><span class="num">05</span>Tradeoffs &amp; what I'd improve</h2>
+        <ul>
+          <li><b>Static HTML only</b> — many sites render prices via JavaScript; for those the next step is a headless browser (Playwright) to scrape the rendered DOM.</li>
+          <li><b>Add scheduling + alerts</b> — run daily and email/Telegram a diff when a price drops below a threshold.</li>
+          <li><b>Respect robots.txt &amp; rate-limit</b> for production use against third-party sites.</li>
+        </ul>
+
+        <div class="case__cta">
+          <h2 style="margin:0 0 8px;border:0;">Need fresh data from the web?</h2>
+          <p style="margin:0 0 18px;color:var(--text-soft);">I can build a scraper for your target sites — one-off exports, scheduled price monitoring, or a data pipeline into your tools.</p>
+          <a class="btn btn--primary" href="../index.html#contact">Send me your idea →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> Yusif · Built with Python &amp; static HTML</span>
+      <span><a href="../index.html">Back to portfolio ↑</a></span>
+    </div>
+  </footer>
+  <script src="../case-nav.js"></script>
+</body>
+</html>

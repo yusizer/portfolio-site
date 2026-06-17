@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: production-style FastAPI REST API with JWT auth and posts CRUD.">
+  <title>Case study — FastAPI JWT CRUD API · Yusif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__brand" href="../index.html">Yusif<span>.</span></a>
+      <nav class="nav__links">
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Send your idea</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case">
+    <div class="container">
+      <a class="case__back" href="../index.html#work">← Back to all work</a>
+      <div class="case__head__tag">Case study · Showcase build</div>
+      <h1>FastAPI JWT CRUD API</h1>
+      <p class="case__sub">A production-style REST API: JWT authentication (access + refresh tokens) and full posts CRUD with owner-only permissions — tested end-to-end, with auto-generated Swagger UI.</p>
+      <div class="case__meta">
+        <span><b>Stack:</b> FastAPI · PyJWT · bcrypt · SQLAlchemy 2 (async) · Pydantic v2</span>
+        <span><b>Delivery:</b> 1–2 weeks</span>
+        <span><b>Tests:</b> 19 passing</span>
+      </div>
+
+      <div class="case__demo">
+        <div class="case__demo__left">
+          <h3>Explore the code & Swagger</h3>
+          <p>Full source on GitHub, with 19 pytest cases covering auth, CRUD, and owner permissions.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn--primary" href="https://github.com/yusizer/fastapi-jwt-crud" target="_blank" rel="noopener">View source ↗</a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <h2><span class="num">01</span>Context</h2>
+        <p>Almost every product backend needs the same foundation: let users register and log in, issue tokens, and let them create/read/update/delete their own resources safely. This project is that foundation, built the way a real product team would — not a tutorial.</p>
+
+        <h2><span class="num">02</span>Problem</h2>
+        <p>Rolling your own auth is where juniors get hurt: plaintext passwords, tokens that never expire, no validation, and "it works on my machine" with zero tests. The job here was to build it so it could actually go to production — secure by default, validated, and provably correct via tests.</p>
+
+        <h2><span class="num">03</span>Solution</h2>
+        <ul>
+          <li><b>JWT auth:</b> short-lived access tokens + long-lived refresh tokens (HS256), bcrypt-hashed passwords, <code class="mono">/auth/register</code>, <code class="mono">/auth/login</code>, <code class="mono">/auth/refresh</code>, <code class="mono">/auth/me</code>.</li>
+          <li><b>Posts CRUD:</b> create / list / get / update / delete. Update and delete are <b>owner-only</b> — a different logged-in user gets <code class="mono">403</code>, not your data.</li>
+          <li><b>Validation:</b> Pydantic v2 — email format, min password length, field constraints — bad input returns <code class="mono">422</code> automatically.</li>
+          <li><b>DB:</b> SQLAlchemy 2 async — SQLite for dev, PostgreSQL for production (one config switch via <code class="mono">DATABASE_URL</code>).</li>
+          <li><b>Tests:</b> 19 end-to-end cases with pytest + httpx — auth flows, CRUD, owner permissions, duplicate/short-password rejection, invalid tokens.</li>
+          <li><b>Swagger UI</b> auto-generated at <code class="mono">/docs</code> — the API documents itself.</li>
+        </ul>
+
+        <h2><span class="num">04</span>Outcome</h2>
+        <div class="case__pull">A secure, validated, tested REST API that documents itself — the kind of foundation a client can build a real product on without rewriting auth.</div>
+
+        <h2><span class="num">05</span>Tradeoffs &amp; what I'd improve</h2>
+        <ul>
+          <li><b>HS256 over RS256</b> — simpler single-service setup; for multi-service I'd switch to RS256 (asymmetric) so other services can verify tokens without the secret.</li>
+          <li><b>SQLite for dev</b> — perfect for local/tests; production uses PostgreSQL (one line).</li>
+          <li><b>Add rate limiting &amp; refresh-token rotation</b> — next hardening step for internet-facing deploys.</li>
+        </ul>
+
+        <div class="case__cta">
+          <h2 style="margin:0 0 8px;border:0;">Need a secure API foundation?</h2>
+          <p style="margin:0 0 18px;color:var(--text-soft);">I can ship a JWT-authenticated REST API tailored to your data model in 1–2 weeks — tested, documented, Dockerized.</p>
+          <a class="btn btn--primary" href="../index.html#contact">Send me your idea →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> Yusif · Built with Python &amp; static HTML</span>
+      <span><a href="../index.html">Back to portfolio ↑</a></span>
+    </div>
+  </footer>
+  <script src="../case-nav.js"></script>
+</body>
+</html>

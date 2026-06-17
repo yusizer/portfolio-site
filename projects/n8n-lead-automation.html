@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: n8n automation workflow — form → Google Sheets → email → Telegram.">
+  <title>Case study — n8n Lead Automation · Yusif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__brand" href="../index.html">Yusif<span>.</span></a>
+      <nav class="nav__links">
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Send your idea</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case">
+    <div class="container">
+      <a class="case__back" href="../index.html#work">← Back to all work</a>
+      <div class="case__head__tag">Case study · No-code automation</div>
+      <h1>n8n Lead Automation</h1>
+      <p class="case__sub">A self-hosted n8n workflow: a web form submits a lead → a row is appended to Google Sheets → a confirmation email is sent → a notification lands in Telegram. Four nodes, zero code, one workflow.</p>
+      <div class="case__meta">
+        <span><b>Platform:</b> n8n (self-hosted via Docker)</span>
+        <span><b>Integrations:</b> Google Sheets · SMTP · Telegram</span>
+        <span><b>Delivery:</b> 1–3 days</span>
+      </div>
+
+      <div class="case__demo">
+        <div class="case__demo__left">
+          <h3>Reusable &amp; importable</h3>
+          <p>The workflow exports as a JSON file — import it into any n8n instance and configure credentials in minutes.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn--primary" href="https://github.com/yusizer/n8n-lead-automation" target="_blank" rel="noopener">View source ↗</a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <h2><span class="num">01</span>Context</h2>
+        <p>Small businesses live and die by leads, but capturing them means juggling tools: a form, a spreadsheet, an inbox, a chat. The job here was to glue those together so one form submission does all four — without maintaining custom code for each integration.</p>
+
+        <h2><span class="num">02</span>Problem</h2>
+        <p>Manual hand-off between tools means dropped leads: a submission that never made it to the sheet, an owner who forgot to check email, a customer who wasn't notified. Writing a custom integration app for each client is overkill when a no-code workflow does it in an afternoon.</p>
+
+        <h2><span class="num">03</span>Solution</h2>
+        <ul>
+          <li><b>4-node workflow:</b> Webhook (form POST) → Append to Google Sheets → Send confirmation email (SMTP) → Notify a Telegram chat.</li>
+          <li><b>Self-hosted n8n</b> via <code class="mono">docker compose</code> — basic auth, encryption key, public webhook URL; runs anywhere (VPS/Railway).</li>
+          <li><b>Demo form</b> included (<code class="mono">form/index.html</code>) that posts to the webhook — drop it on any static host.</li>
+          <li><b>Credentials stay safe</b> in n8n's encrypted store; the exported workflow only has placeholders.</li>
+          <li><b>Importable:</b> the workflow is a JSON file — import, connect credentials, activate.</li>
+        </ul>
+
+        <h2><span class="num">04</span>Outcome</h2>
+        <div class="case__pull">One form submission → a new spreadsheet row, an instant customer reply, and a Telegram ping — so no lead is ever lost or forgotten.</div>
+        <div class="case__bench">
+          <h4>Why this matters (third-party benchmarks, cited)</h4>
+          <ul>
+            <li>Lead-capture automation converts <b>2–4×</b> better than manual follow-up. <a href="https://www.botract.com/blog/telegram-bot-cost-pricing-guide" target="_blank" rel="noopener">botract.com</a></li>
+            <li>Eliminating ~8 hrs/week of manual glue work is a typical outcome of form→CRM→notification automation.</li>
+          </ul>
+        </div>
+
+        <h2><span class="num">05</span>Tradeoffs &amp; what I'd improve</h2>
+        <ul>
+          <li><b>n8n hosting</b> needs a small always-on server (or n8n cloud) — a few $/mo or the Oracle always-free VM.</li>
+          <li><b>Add a CRM sync</b> (HubSpot/Notion) and a "thank you" auto-reply with a Calendly link as next nodes.</li>
+          <li><b>Add error notifications</b> — ping Telegram if any node fails, so failures are visible.</li>
+        </ul>
+
+        <div class="case__cta">
+          <h2 style="margin:0 0 8px;border:0;">Want your tools talking to each other?</h2>
+          <p style="margin:0 0 18px;color:var(--text-soft);">I can wire your form, spreadsheet, email, and chat into one automated pipeline — no-code where it fits, custom where it doesn't.</p>
+          <a class="btn btn--primary" href="../index.html#contact">Send me your idea →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> Yusif · Built with Python &amp; static HTML</span>
+      <span><a href="../index.html">Back to portfolio ↑</a></span>
+    </div>
+  </footer>
+  <script src="../case-nav.js"></script>
+</body>
+</html>

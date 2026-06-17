@@ -67,8 +67,8 @@ const PROJECTS = [
     tags: ["FastAPI", "PostgreSQL", "JWT", "Docker", "Pytest"],
     github: "https://github.com/yusizer/fastapi-jwt-crud",
     demo: null,
-    caseStudy: null,
-    status: "wip",
+    caseStudy: "projects/fastapi-jwt-crud.html",
+    status: "live",
   },
   {
     emoji: "🕸️",
@@ -79,8 +79,8 @@ const PROJECTS = [
     tags: ["BeautifulSoup", "FastAPI", "Scrapy", "Vercel"],
     github: "https://github.com/yusizer/web-scraper-dashboard",
     demo: null,
-    caseStudy: null,
-    status: "wip",
+    caseStudy: "projects/web-scraper-dashboard.html",
+    status: "live",
   },
   {
     emoji: "⚡",
@@ -91,8 +91,8 @@ const PROJECTS = [
     tags: ["n8n", "Automation", "Google Sheets", "Railway"],
     github: "https://github.com/yusizer/n8n-lead-automation",
     demo: null,
-    caseStudy: null,
-    status: "wip",
+    caseStudy: "projects/n8n-lead-automation.html",
+    status: "live",
   },
   {
     emoji: "💬",
@@ -103,8 +103,8 @@ const PROJECTS = [
     tags: ["FastAPI", "TF-IDF", "OpenAI", "RAG", "SQLite"],
     github: "https://github.com/yusizer/ai-support-chatbot",
     demo: null,
-    caseStudy: null,
-    status: "wip",
+    caseStudy: "projects/ai-support-chatbot.html",
+    status: "live",
   },
   {
     emoji: "🌐",
