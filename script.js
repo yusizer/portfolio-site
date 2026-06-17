@@ -77,7 +77,7 @@ const PROJECTS = [
     blurb:
       "Scrapes prices from any site, stores history, and shows a table + trends on a simple web frontend. Type a URL, get the data.",
     tags: ["BeautifulSoup", "FastAPI", "Scrapy", "Vercel"],
-    github: null,
+    github: "https://github.com/yusizer/web-scraper-dashboard",
     demo: null,
     caseStudy: null,
     status: "wip",
