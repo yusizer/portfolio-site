@@ -102,7 +102,7 @@ const PROJECTS = [
       "Retrieval (TF-IDF) over a FAQ knowledge base + optional GPT answers grounded in context. Runs in demo mode with no API key; graceful fallback + human handoff. Web chat UI + FAQ admin.",
     tags: ["FastAPI", "TF-IDF", "OpenAI", "RAG", "SQLite"],
     github: "https://github.com/yusizer/ai-support-chatbot",
-    demo: null,
+    demo: "https://ai-support-chatbot-re9h.onrender.com/",
     caseStudy: "projects/ai-support-chatbot.html",
     status: "live",
   },
