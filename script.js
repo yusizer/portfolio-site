@@ -54,7 +54,8 @@ const PROJECTS = [
       "A manager bot provisions per-customer child bots via the new Managed Bots API (9.6); each tenant gets FSM lead capture + FAQ with replies streamed as Rich Messages (10.1). Multi-tenant FastAPI admin, tenant-isolated data, encrypted tokens, audit log, 27 tests.",
     tags: ["aiogram 3.29", "Managed Bots 9.6", "Rich Messages 10.1", "FastAPI", "Postgres", "Multi-tenant"],
     github: "https://github.com/yusizer/telegram-managed-bot-crm",
-    demo: null, // ← Render admin URL once deployed
+    demo: "https://telegram-managed-bot-crm.onrender.com",
+    bot: "https://t.me/managebotaitgpbot",
     caseStudy: "projects/telegram-managed-bot-crm.html",
     status: "live",
   },
@@ -272,6 +273,9 @@ function renderProjects() {
     const demo = p.demo
       ? `<a class="link--accent" href="${p.demo}" target="_blank" rel="noopener">Live demo ↗</a>`
       : `<a class="link--muted">Demo soon</a>`;
+    const bot = p.bot
+      ? `<a class="link--accent" href="${p.bot}" target="_blank" rel="noopener">Try bot ↗</a>`
+      : "";
     const study = p.caseStudy
       ? `<a class="link--accent" href="${p.caseStudy}">Read case study →</a>`
       : `<a class="link--muted">Case study soon</a>`;
@@ -285,7 +289,7 @@ function renderProjects() {
         <div class="project-card__metric"><span class="num">${p.metric.num}</span> — ${p.metric.label}</div>
         <p>${p.blurb}</p>
         <div class="tags">${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}</div>
-        <div class="project-card__links">${github}${demo}${study}</div>
+        <div class="project-card__links">${github}${demo}${bot}${study}</div>
       </article>`;
   }).join("");
 
