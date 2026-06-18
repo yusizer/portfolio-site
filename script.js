@@ -66,7 +66,7 @@ const PROJECTS = [
       "JWT auth, full CRUD, PostgreSQL, Docker. Auto-generated Swagger UI as the live demo so any client can poke the endpoints in 10 seconds.",
     tags: ["FastAPI", "PostgreSQL", "JWT", "Docker", "Pytest"],
     github: "https://github.com/yusizer/fastapi-jwt-crud",
-    demo: null,
+    demo: "https://fastapi-jwt-crud.onrender.com/docs",
     caseStudy: "projects/fastapi-jwt-crud.html",
     status: "live",
   },
