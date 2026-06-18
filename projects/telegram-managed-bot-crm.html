@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: multi-tenant Telegram CRM on Managed Bots (Bot API 9.6) + Rich Messages (10.1).">
+  <title>Case study — Multi-tenant Telegram CRM · Yusif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__brand" href="../index.html">Yusif<span>.</span></a>
+      <nav class="nav__links">
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Send your idea</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case">
+    <div class="container">
+      <a class="case__back" href="../index.html#work">← Back to all work</a>
+      <div class="case__head__tag">Case study · Flagship · 2026 Bot API</div>
+      <h1>Multi-tenant Telegram CRM — Managed Bots + Rich Messages</h1>
+      <p class="case__sub">A platform bot that provisions a separate Telegram bot per business, each running lead-capture and FAQ flows with AI replies streamed as Rich Messages — all behind a multi-tenant admin dashboard with isolated data and audit logs.</p>
+      <div class="case__meta">
+        <span><b>Stack:</b> aiogram 3.29 · FastAPI · SQLAlchemy 2 async · PostgreSQL · Fernet</span>
+        <span><b>Delivery:</b> 2–4 weeks</span>
+        <span><b>Tests:</b> 27 passing</span>
+      </div>
+
+      <div class="case__demo">
+        <div class="case__demo__left">
+          <h3>Explore the code</h3>
+          <p>Full source on GitHub, with 27 pytest cases — multi-tenant isolation, the lead FSM, provisioning with encrypted tokens, and the admin endpoints.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn--primary" href="https://github.com/yusizer/telegram-managed-bot-crm" target="_blank" rel="noopener">View source ↗</a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <h2><span class="num">01</span>Context</h2>
+        <p>In April 2026 Telegram shipped <b>Managed Bots (Bot API 9.6)</b> — one bot can create and control other bots — and in June 2026 <b>Rich Messages (Bot API 10.1)</b> for streaming structured AI replies. Almost no portfolio had them yet. The opportunity: build the thing these features exist for — a true multi-tenant CRM where every business gets its own bot, without N separate deployments.</p>
+
+        <h2><span class="num">02</span>Problem</h2>
+        <p>Running one Telegram bot per client traditionally means one token, one process, one database per customer — an operational nightmare that doesn't scale and leaks data between tenants. The job was to build it the way a product team would: one platform, many tenants, each strictly isolated, with the new native multi-tenancy the Bot API just enabled.</p>
+
+        <h2><span class="num">03</span>Solution</h2>
+        <ul>
+          <li><b>Managed Bots (9.6):</b> a manager bot provisions per-customer child bots via <code class="mono">getManagedBotToken</code>, <code class="mono">KeyboardButtonRequestManagedBot</code>, and <code class="mono">t.me/newbot/{manager}/{suggested}</code> links. On <code class="mono">managed_bot_created</code> the platform fetches the child token, <b>encrypts it at rest (Fernet)</b>, and spawns a polling task.</li>
+          <li><b>Rich Messages (10.1):</b> replies stream via <code class="mono">sendRichMessageDraft</code> (ephemeral 30s preview) then finalize with <code class="mono">sendRichMessage</code> — bold headings, bullet lists, code blocks, built through a poka-yoke HTML builder that auto-escapes all user content.</li>
+          <li><b>Multi-tenancy, two paths:</b> the real Managed Bots flow <i>and</i> a simulated <code class="mono">/demo</code> path (one bot switches tenants via inline keyboard) so it's demoable in a single chat without creating live child bots.</li>
+          <li><b>FSM flows:</b> lead capture (name → contact → service → note), FAQ (RAG-lite over a per-tenant knowledge base), and an onboarding wizard — built with <b>StatesGroup, not a framework</b>, per the "simple composable patterns over bloat" principle.</li>
+          <li><b>FastAPI admin:</b> tenants overview, per-tenant leads with status workflow, 7-day analytics, FAQ CRUD. Every query filters by <code class="mono">tenant_id</code> — a tenant can never see another's data. Session auth + append-only audit log.</li>
+          <li><b>Tests:</b> 27 cases — the lead state machine, tenant isolation at the data and HTTP layers, provisioning with encrypted-token verification, the Rich builder, and admin CRUD.</li>
+        </ul>
+
+        <h2><span class="num">04</span>Outcome</h2>
+        <div class="case__pull">A flagship that ships two Bot API features weeks after their release — native multi-tenancy, streaming rich replies, encrypted secrets, and provable tenant isolation. The kind of build that reads as senior because it leans on the platform's newest primitives instead of reinventing them.</div>
+
+        <h2><span class="num">05</span>Tradeoffs &amp; what's next</h2>
+        <ul>
+          <li><b>Per-bot long-polling over webhooks</b> — simpler for an MVP; webhooks scale further and are a Phase 3 swap.</li>
+          <li><b>Demo-mode LLM (no API key)</b> — RAG-lite retrieval with templated rich answers; an OpenAI key is a one-function swap-in at <code class="mono">answer_faq</code> to ground real GPT replies.</li>
+          <li><b>Phase 2:</b> booking FSM, channel auto-posting scheduler, Redis FSM storage, richer analytics. <b>Phase 3:</b> tenant subscription payments (Stripe + Telegram Stars), moderation queue, token rotation.</li>
+        </ul>
+
+        <div class="case__cta">
+          <h2 style="margin:0 0 8px;border:0;">Want a Telegram bot that scales to many clients?</h2>
+          <p style="margin:0 0 18px;color:var(--text-soft);">I can build a multi-tenant Telegram CRM / automation platform on the newest Bot API — isolated per customer, with an admin dashboard and streaming AI replies. 2–4 weeks.</p>
+          <a class="btn btn--primary" href="../index.html#contact">Send me your idea →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> Yusif · Built with Python &amp; static HTML</span>
+      <span><a href="../index.html">Back to portfolio ↑</a></span>
+    </div>
+  </footer>
+  <script src="../case-nav.js"></script>
+</body>
+</html>

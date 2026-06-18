@@ -47,6 +47,18 @@ const SERVICES = [
 // status: "live" | "wip". demo: URL or null. caseStudy: page URL or null.
 const PROJECTS = [
   {
+    emoji: "🏢",
+    title: "Multi-tenant Telegram CRM (Managed Bots + Rich Messages)",
+    metric: { num: "Bot API 10.1", label: "shipped 1 week after release — streaming rich replies" },
+    blurb:
+      "A manager bot provisions per-customer child bots via the new Managed Bots API (9.6); each tenant gets FSM lead capture + FAQ with replies streamed as Rich Messages (10.1). Multi-tenant FastAPI admin, tenant-isolated data, encrypted tokens, audit log, 27 tests.",
+    tags: ["aiogram 3.29", "Managed Bots 9.6", "Rich Messages 10.1", "FastAPI", "Postgres", "Multi-tenant"],
+    github: "https://github.com/yusizer/telegram-managed-bot-crm",
+    demo: null, // ← Render admin URL once deployed
+    caseStudy: "projects/telegram-managed-bot-crm.html",
+    status: "live",
+  },
+  {
     emoji: "🤖",
     title: "Telegram Lead Bot + Admin Panel",
     metric: { num: "30 sec", label: "first response vs 4 hours manual" },
