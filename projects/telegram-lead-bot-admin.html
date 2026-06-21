@@ -44,8 +44,9 @@
           <p>Open the admin panel (read-only demo, seeded with sample data) and watch a bot collect a lead in Telegram.</p>
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <!-- Replace DEMO_URL with the Railway/Oracle public URL once deployed -->
-          <a class="btn btn--primary" href="DEMO_URL" target="_blank" rel="noopener" id="demo-link">Open admin demo →</a>
+          <!-- Live admin demo on Render. Login password: demo -->
+          <a class="btn btn--primary" href="https://telegram-lead-bot-admin.onrender.com" target="_blank" rel="noopener" id="demo-link">Open admin demo →</a>
+          <span style="align-self:center;color:var(--muted);font-size:.9rem;">login: <code>demo</code></span>
           <a class="btn btn--ghost" href="https://github.com/yusizer/telegram-lead-bot-admin" target="_blank" rel="noopener">View source ↗</a>
         </div>
       </div>
@@ -146,15 +147,10 @@
         sync();
       });
     })();
-    // Disable the demo button until the real URL is pasted in
+    // Demo link is wired to the live Render admin (login: demo).
     const demoLink = document.getElementById("demo-link");
     if (demoLink.getAttribute("href") === "DEMO_URL") {
-      demoLink.removeAttribute("href");
-      demoLink.classList.remove("btn--primary");
-      demoLink.classList.add("btn--ghost");
-      demoLink.style.opacity = ".6";
-      demoLink.style.pointerEvents = "none";
-      demoLink.textContent = "Live demo coming soon";
+      demoLink.style.display = "none";
     }
   </script>
 </body>

@@ -67,7 +67,7 @@ const PROJECTS = [
       "aiogram 3 bot collects leads via a step-by-step dialog; a FastAPI admin panel shows a live stats dashboard and lead management. Single Docker container, deployed and ready.",
     tags: ["Python", "aiogram 3", "FastAPI", "SQLite", "Docker"],
     github: "https://github.com/yusizer/telegram-lead-bot-admin",
-    demo: null, // ← paste Railway/Oracle public URL once deployed
+    demo: "https://telegram-lead-bot-admin.onrender.com", // admin login: demo
     caseStudy: "projects/telegram-lead-bot-admin.html",
     status: "live",
   },
@@ -391,33 +391,24 @@ function initTheme() {
   });
 }
 
-// ---- Contact form (Formspree AJAX, graceful fallback) ----
+// ---- Contact form (Formsubmit.co AJAX, graceful fallback) ----
 function initForm() {
   const form = document.getElementById("contact-form");
   const msg = document.getElementById("form-msg");
   const submit = document.getElementById("form-submit");
-  // Replace with your Formspree form ID (see README). Until then, falls back to email.
-  const FORMSPREE_ID = "your-form-id";
+  // Formsubmit.co — no signup. First submission sends a one-time confirmation
+  // email to the address below; after it's confirmed, all submissions arrive.
+  const FORM_ENDPOINT = "https://formsubmit.co/yusifabdullayev48@gmail.com";
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     msg.className = "form__msg";
     msg.textContent = "";
 
-    if (FORMSPREE_ID === "your-form-id") {
-      // No Formspree configured — open the user's email client prefilled.
-      const data = new FormData(form);
-      const body = `Name: ${data.get("name")}\nEmail: ${data.get("email")}\nBusiness: ${data.get("business_type")}\nBudget: ${data.get("budget")}\n\nIdea:\n${data.get("idea")}`;
-      window.location.href = `mailto:yusifabdullayev48@gmail.com?subject=${encodeURIComponent("New bot inquiry")}&body=${encodeURIComponent(body)}`;
-      msg.className = "form__msg ok";
-      msg.textContent = "Opening your email app — or write directly to yusifabdullayev48@gmail.com";
-      return;
-    }
-
     submit.disabled = true;
     submit.textContent = "Sending…";
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
         body: new FormData(form),
         headers: { Accept: "application/json" },
